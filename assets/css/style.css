@@ -1,0 +1,8 @@
+body {
+    background-color: yellow;
+}
+
+.cartoon-buttons,
+.cartoon-display {
+    border: black solid;
+}
