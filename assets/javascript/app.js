@@ -9,15 +9,7 @@ var cartoonChar = [
 
 $(document).ready(function () {
 
-    $('#search').on('click', function (event) {
-        var newChar = $('#user-character').val();
-        console.log(newChar);
-        // The Cartoon Character from the textbox is then added to our array
-        if (newChar !== '') {
-            cartoonChar.push(newChar);
-            $('#user-character').val('');
-        }
-    });
+
 
 ///same function as displayAnswers in the Trivia Game
     function cartoonButton() {
@@ -59,6 +51,17 @@ $(document).ready(function () {
                 }
             });
     });
+
+    $('#search').on('click', function (event) {
+        var newChar = $('#user-character').val();
+        console.log(newChar);
+        // The Cartoon Character from the textbox is then added to our array
+        if (newChar !== '') {
+            cartoonChar.push(newChar);
+            //  $('#user-character').val('');
+        }
+    })
+
 
     $(document).on('click', 'img', function () {
         var state = $(this).attr('data-state');
