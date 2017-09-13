@@ -39,6 +39,8 @@ $(document).ready(function () {
                     console.log('where am i ' + gifResults);
                     for (var i = 0; i < 10; i++) {
                         if (gifResults[i].rating !== 'r' && gifResults[i].rating !== 'pg-13') {
+                           var gifDiv = $('<div>');
+                            var gifRating = ('Rating ' + gifResults[i].rating);
                             var gifImage = $('<img>');
                             gifImage.attr({
                                 'src': gifResults[i].images.fixed_height_still.url,
@@ -46,8 +48,10 @@ $(document).ready(function () {
                                 'data-still': gifResults[i].images.fixed_height_still.url,
                                 'data-state': 'still'
                             });
+                            gifDiv.append(gifRating);
+                             gifDiv.append(gifImage);
+                            $('.cartoon-display').append(gifDiv);
 
-                            $('.cartoon-display').append(gifImage);
 
                         }
                     }
