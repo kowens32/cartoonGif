@@ -37,22 +37,17 @@ $(document).ready(function () {
                     console.log(response);
                     var gifResults = response.data;
                     console.log('where am i ' + gifResults);
-                    for (var i = 0; i < 10; i++) {
+
+                    for (var i = 0; i < 15; i++) {
                         if (gifResults[i].rating !== 'r' && gifResults[i].rating !== 'pg-13') {
-                           var gifDiv = $('<div>');
-                            var gifRating = ('Rating ' + gifResults[i].rating);
-                            var gifImage = $('<img>');
-                            gifImage.attr({
-                                'src': gifResults[i].images.fixed_height_still.url,
-                                'data-animate': gifResults[i].images.fixed_height.url,
-                                'data-still': gifResults[i].images.fixed_height_still.url,
-                                'data-state': 'still'
-                            });
-                            gifDiv.append(gifRating);
-                             gifDiv.append(gifImage);
-                            $('.cartoon-display').append(gifDiv);
 
+                            var gifDiv = $('<div>');
+                            gifDiv.attr('class', 'gifDiv');
+                            var gifRating = ('<p>' + 'Rating ' + gifResults[i].rating + '</p>');
 
+                            var gifImage = createGifImage(gifResults[i].images.fixed_height.url, gifResults[i].images.fixed_height_still.url);
+
+                            appendGif(gifDiv, gifRating, gifImage);
                         }
                     }
                 });
@@ -60,43 +55,53 @@ $(document).ready(function () {
     }
     displayCartoon();
 
-//Adds character to the Array
-    function addChar() {
-        $(document).on('click', '#search', function (event) {
-            var newChar = $('#user-character').val();
-            console.log(newChar);
-            if (newChar !== '') {
-                cartoonChar.push(newChar);
-                console.log(cartoonChar);
-                cartoonButton();
-                displayCartoon();
-            }
-        })
+    $(document).on('click', '#search', addCharacterToArray);
+    $(document).on('click', 'img', updateGifState);
+
+    function updateGifState () {
+        var state = $(this).attr('data-state');
+        console.log('who ' + state);
+        if (state === 'still') {
+            $(this).attr('src', $(this).attr('data-animate'));
+            $(this).attr('data-state', 'animate');
+        }
+
+        else {
+            $(this).attr('src', $(this).attr('data-still'));
+            $(this).attr('data-state', 'still');
+        }
     }
-    addChar();
 
-
-//Animates the gifs once they are clicked
-    function animate() {
-        $(document).on('click', 'img', function () {
-            var state = $(this).attr('data-state');
-            console.log('who ' + state);
-            if (state === 'still') {
-                $(this).attr('src', $(this).attr('data-animate'));
-                $(this).attr('data-state', 'animate');
-            }
-
-            else {
-                $(this).attr('src', $(this).attr('data-still'));
-                $(this).attr('data-state', 'still');
-            }
+    function addCharacterToArray(event) {
+        var newChar = $('#user-character').val();
+        console.log(newChar);
+        if (newChar !== '') {
+            cartoonChar.push(newChar);
+            console.log(cartoonChar);
+            cartoonButton();
+            displayCartoon();
+        }
+    }
+    function createGifImage(animateSrc, src) {
+        var gifImage = $('<img>');
+        gifImage.attr('class', '.img-resposive');
+        gifImage.attr({
+            'src': src,
+            'data-animate': animateSrc,
+            'data-still': src,
+            'data-state': 'still'
         });
 
+        return gifImage;
     }
-    animate();
 
+    function  appendGif(div, rating, img) {
 
+        gifDiv.append(gifRating);
+        gifDiv.append(gifImage);
+        $('.cartoon-display').append(gifDiv);
 
-    });
+    }
+});
 
 
