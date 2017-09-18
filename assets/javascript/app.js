@@ -9,52 +9,9 @@ var cartoonChar = [
 
 $(document).ready(function () {
 
+    createButtons();
 
-
-///same function as displayAnswers in the Trivia Game
-    function cartoonButton() {
-        $('.cartoon-buttons').html('');
-        for (var i = 0; i < cartoonChar.length; i++) {
-            var b = $('<button>');
-            b.attr('data-name', cartoonChar[i]);
-            b.attr('class', 'character');
-            b.text(cartoonChar[i]);
-            b.appendTo('.cartoon-buttons')
-        }
-    }
-
-    cartoonButton();
-
-
-    function displayCartoon() {
-        $(document).on('click', '.cartoon-buttons .character', function () {
-            $('.cartoon-display').empty();
-            var cartoonGif = $(this).attr('data-name');
-            console.log('the name is ' + this);
-            var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' + cartoonGif + '&api_key=dc6zaTOxFJmzC';
-            $.ajax({url: queryURL, method: 'GET'})
-                .done(function (response) {
-                    console.log(response);
-                    var gifResults = response.data;
-                    console.log('where am i ' + gifResults);
-
-                    for (var i = 0; i < 15; i++) {
-                        if (gifResults[i].rating !== 'r' && gifResults[i].rating !== 'pg-13') {
-
-                            var gifDiv = $('<div>');
-                            gifDiv.attr('class', 'gifDiv');
-                            var gifRating = ('<p>' + 'Rating ' + gifResults[i].rating + '</p>');
-
-                            var gifImage = createGifImage(gifResults[i].images.fixed_height.url, gifResults[i].images.fixed_height_still.url);
-
-                            appendGif(gifDiv, gifRating, gifImage);
-                        }
-                    }
-                });
-        });
-    }
-    displayCartoon();
-
+    $(document).on('click', '.cartoon-buttons .character', createGif);
     $(document).on('click', '#search', addCharacterToArray);
     $(document).on('click', 'img', updateGifState);
 
@@ -96,11 +53,48 @@ $(document).ready(function () {
     }
 
     function  appendGif(div, rating, img) {
+        div.append(rating);
+        div.append(img);
+        $('.cartoon-display').append(div);
+    }
 
-        gifDiv.append(gifRating);
-        gifDiv.append(gifImage);
-        $('.cartoon-display').append(gifDiv);
+    function createGif () {
+        $('.cartoon-display').empty();
+        var cartoonGif = $(this).attr('data-name');
+        console.log('the name is ' + this);
+        var queryURL = 'http://api.giphy.com/v1/gifs/search?q=' + cartoonGif + '&api_key=dc6zaTOxFJmzC';
+        var gifQuery = $.ajax({url: queryURL, method: 'GET'})
+        gifQuery.done(init);
+    };
 
+    function init(response) {
+        console.log(response);
+        var gifResults = response.data;
+        console.log('where am i ' + gifResults);
+
+        for (var i = 0; i < 15; i++) {
+            if (gifResults[i].rating !== 'r' && gifResults[i].rating !== 'pg-13') {
+
+                var gifDiv = $('<div>');
+                gifDiv.attr('class', 'gifDiv');
+                var gifRating = ('<p>' + 'Rating ' + gifResults[i].rating + '</p>');
+
+                var gifImage = createGifImage(gifResults[i].images.fixed_height.url, gifResults[i].images.fixed_height_still.url);
+
+                appendGif(gifDiv, gifRating, gifImage);
+            }
+        }
+    }
+
+    function createButtons() {
+        $('.cartoon-buttons').html('');
+        for (var i = 0; i < cartoonChar.length; i++) {
+            var b = $('<button>');
+            b.attr('data-name', cartoonChar[i]);
+            b.attr('class', 'character');
+            b.text(cartoonChar[i]);
+            b.appendTo('.cartoon-buttons')
+        }
     }
 });
 
