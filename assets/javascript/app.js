@@ -15,6 +15,7 @@ $(document).ready(function () {
     $(document).on('click', '#search', addCharacterToArray);
     $(document).on('click', 'img', updateGifState);
 
+
     function updateGifState () {
         var state = $(this).attr('data-state');
         console.log('who ' + state);
@@ -34,8 +35,8 @@ $(document).ready(function () {
         if (newChar !== '') {
             cartoonChar.push(newChar);
             console.log(cartoonChar);
-            cartoonButton();
-            displayCartoon();
+            createButtons();
+            createGif();
         }
     }
     function createGifImage(animateSrc, src) {
