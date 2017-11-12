@@ -1,4 +1,4 @@
-
+$(document).ready(function () {
 
 var cartoonChar = [
     'Doug Funnie', 'Angelica Pickles', 'Johnny Bravo', 'Scooby Doo', 'Arthur', 'Eliza Thornberry', 'Ash Ketchum', 'Timmy Turner', 'Helga Pataki', 'Max Goof', 'The Powerpuff Girls', 'Tommy Pickles',
@@ -7,7 +7,7 @@ var cartoonChar = [
     var cartoonDisplay = [''];
     var cartoonGif;
 
-$(document).ready(function () {
+
 
     createButtons();
 

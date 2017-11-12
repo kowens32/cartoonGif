@@ -4,10 +4,10 @@ body {
 
 .cartoon-buttons,
 .cartoon-display {
-    border: black solid;
-}
 
-/*.gifDiv {*/
-    /*border: cadetblue solid;*/
-    /*width: 100px ;*/
-/*}*/
+}
+.title {
+    font-family: 'Cabin Sketch', cursive;
+    text-align: center;
+
+}
