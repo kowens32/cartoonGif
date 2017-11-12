@@ -29,14 +29,14 @@ $(document).ready(function () {
         }
     }
 
-    function addCharacterToArray(event) {
+    function addCharacterToArray() {
         var newChar = $('#user-character').val();
         console.log(newChar);
         if (newChar !== '') {
             cartoonChar.push(newChar);
             console.log(cartoonChar);
             createButtons();
-            createGif();
+
         }
     }
     function createGifImage(animateSrc, src) {
@@ -69,6 +69,7 @@ $(document).ready(function () {
 
     function init(response) {
         console.log(response);
+
         var gifResults = response.data;
         console.log('where am i ' + gifResults);
 
