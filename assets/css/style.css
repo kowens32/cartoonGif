@@ -2,10 +2,17 @@ body {
     background-color: yellow;
 }
 
-.cartoon-buttons,
-.cartoon-display {
+.gifDiv {
+    height: 300px;
+    width: 300px;
 
 }
+
+.cartoon-display
+{
+    align-content: flex-start;
+}
+
 .title {
     font-family: 'Cabin Sketch', cursive;
     text-align: center;
