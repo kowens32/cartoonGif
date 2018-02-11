@@ -5,16 +5,19 @@ body {
 .gifDiv {
     height: 300px;
     width: 300px;
-
+    margin: 0 auto;
 }
+
+.gif
 
 .cartoon-display
 {
-    align-content: flex-start;
+    align-content: center;
 }
 
 .title {
     font-family: 'Cabin Sketch', cursive;
     text-align: center;
+    font-size: 45px;
 
 }

@@ -78,7 +78,7 @@ var cartoonChar = [
 
                 var gifDiv = $('<div>');
                 gifDiv.attr('class', 'gifDiv');
-                var gifRating = ('<p>' + 'Rating ' + gifResults[i].rating + '</p>');
+                var gifRating = ('<h3>' + 'Rating ' + gifResults[i].rating + '</h3>');
 
                 var gifImage = createGifImage(gifResults[i].images.fixed_height.url, gifResults[i].images.fixed_height_still.url);
 
