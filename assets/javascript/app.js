@@ -78,11 +78,11 @@ var cartoonChar = [
 
                 var gifDiv = $('<div>');
                 gifDiv.attr('class', 'gifDiv');
-                var gifRating = ('<h3>' + 'Rating ' + gifResults[i].rating + '</h3>');
+                // var gifRating = ('<h3>' + 'Rating: ' + gifResults[i].rating + '</h3>');
 
                 var gifImage = createGifImage(gifResults[i].images.fixed_height.url, gifResults[i].images.fixed_height_still.url);
 
-                appendGif(gifDiv, gifRating, gifImage);
+                appendGif(gifDiv, gifImage);
             }
         }
     }
